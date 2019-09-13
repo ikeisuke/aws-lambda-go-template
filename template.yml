@@ -1,0 +1,17 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Resources:
+  App1:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: example1
+      Runtime: go1.x
+      CodeUri: s3://cloudformation-package-bucket-packagebucket-1poq5xixcryds/go-lambda-template/aa633b2ff1507809c718c297c5c3275e
+      Timeout: 1
+  App2:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: example2
+      Runtime: go1.x
+      CodeUri: s3://cloudformation-package-bucket-packagebucket-1poq5xixcryds/go-lambda-template/c330ef4ef3b35bf7b07b397fe103b941
+      Timeout: 1

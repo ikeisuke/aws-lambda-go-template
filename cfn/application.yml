@@ -1,10 +1,17 @@
 AWSTemplateFormatVersion: "2010-09-09"
 Transform: 'AWS::Serverless-2016-10-31'
 Resources:
-  App:
+  App1:
     Type: 'AWS::Serverless::Function'
     Properties:
-      Handler: example # ファイル名
+      Handler: example1
       Runtime: go1.x
-      CodeUri: ../build # ビルドファイル設置ディレクトリ
+      CodeUri: ../build/example1
+      Timeout: 1
+  App2:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Handler: example2
+      Runtime: go1.x
+      CodeUri: ../build/example2
       Timeout: 1

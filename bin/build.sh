@@ -6,5 +6,5 @@ find ./handlers -name '*.go' | while read FILE; do
   cd ${WORKSPACE}
   cd ${FUNCDIR}
   go mod download
-  GOARCH=amd64 GOOS=linux go build -o ${WORKSPACE}/build/${EXECNAME}
+  GOARCH=amd64 GOOS=linux go build -o ${WORKSPACE}/build/${EXECNAME}/${EXECNAME}
 done
