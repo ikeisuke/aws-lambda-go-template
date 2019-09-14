@@ -1,5 +1,8 @@
 name: Build
-on: [push]
+on:
+  push:
+    branches:
+    - master
 jobs:
 
   build:
@@ -28,30 +31,30 @@ jobs:
     - name: Check builds
       run: ls -al build
 
-    - name: Setup Python 3.7 for awscli
-      uses: actions/setup-python@v1
-      with:
-        python-version: '3.7'
-        architecture: 'x64'
-    - name: Install awscli
-      run: pip install --upgrade pip awscli
-    - name: Package cfn template
-      run: |
-        aws cloudformation package \
-          --template-file cfn/application.yml \
-          --s3-bucket cloudformation-package-bucket-packagebucket-1poq5xixcryds \
-          --s3-prefix go-lambda-template \
-          --output-template-file template.yml
-      env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-    - name: Deploy cfn template
-      run: |
-        aws cloudformation deploy \
-          --stack-name go-lambda-template \
-          --template-file template.yml \
-          --capabilities CAPABILITY_IAM
-      env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        AWS_DEFAULT_REGION: ap-northeast-1
+    # - name: Setup Python 3.7 for awscli
+    #   uses: actions/setup-python@v1
+    #   with:
+    #     python-version: '3.7'
+    #     architecture: 'x64'
+    # - name: Install awscli
+    #   run: pip install --upgrade pip awscli
+    # - name: Package cfn template
+    #   run: |
+    #     aws cloudformation package \
+    #       --template-file cfn/application.yml \
+    #       --s3-bucket cloudformation-package-bucket-packagebucket-1poq5xixcryds \
+    #       --s3-prefix go-lambda-template \
+    #       --output-template-file template.yml
+    #   env:
+    #     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+    #     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+    # - name: Deploy cfn template
+    #   run: |
+    #     aws cloudformation deploy \
+    #       --stack-name go-lambda-template \
+    #       --template-file template.yml \
+    #       --capabilities CAPABILITY_IAM
+    #   env:
+    #     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+    #     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+    #     AWS_DEFAULT_REGION: ap-northeast-1
